@@ -45,11 +45,9 @@ public class HackathonWebSocket implements WebSocket.OnTextMessage {
     }
 
     private void handleSignInMessage() {
-
     }
 
     private void handleLoginMessage() {
-
     }
 
 }
