@@ -9,12 +9,12 @@
 
 <nav>
     <ul id="n" class="clearfix">
-        <li><a href="#">Homepage</a></li>
-        <li class="sel"><a href="#">Profile</a></li>
-        <li><a href="#">Highscore</a></li>
-        <li><a href="#">Achievements</a></li>
-        <li><a href="#">Game</a></li>
-        <li><a href="#">Advance Statistics</a></li>
+        <li ng-class="{sel: hover1}" ng-mouseenter="hover1 = true" ng-mouseleave="hover1 = false"><a href="#">Homepage</a></li>
+        <li ng-class="{sel: hover2}" ng-mouseenter="hover2 = true" ng-mouseleave="hover2 = false"><a href="#">Profile</a></li>
+        <li ng-class="{sel: hover3}" ng-mouseenter="hover3 = true" ng-mouseleave="hover3 = false"><a href="#">Highscore</a></li>
+        <li ng-class="{sel: hover4}" ng-mouseenter="hover4 = true" ng-mouseleave="hover4 = false"><a href="#">Achievements</a></li>
+        <li ng-class="{sel: hover5}" ng-mouseenter="hover5 = true" ng-mouseleave="hover5 = false"><a href="#/game">Game</a></li>
+        <li ng-class="{sel: hover6}" ng-mouseenter="hover6 = true" ng-mouseleave="hover6 = false"><a href="#">Advance Statistics</a></li>
     </ul>
 </nav>
 
@@ -64,6 +64,10 @@
                 <h1>Something List</h1></div>
             <div class="boxy">
                 <p>Your something (maybe Misys values ...)- 66 total</p>
+				<div ng-controller="UserController">
+					<input type="file" text="Add image" image-model="myFile"/>
+					<button ng-click="uploadFile()">Upload Image</button>
+				</div>
                 <span><a href="#">See all...</a></span>
             </div>
         </div>
