@@ -1,10 +1,9 @@
 package rest;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import app.LoginService;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import util.LoginMessage;
-import util.LoginValidation;
+import util.LoginValidationMessage;
 import util.SignInMessage;
 
 import javax.ws.rs.*;
@@ -22,8 +21,6 @@ public class Resource {
 
     /*
     login example
-
-
      */
 
     @POST
@@ -31,6 +28,9 @@ public class Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Object login(String resource) {
         LoginMessage loginMessage = gson.fromJson(resource, LoginMessage.class);
+
+        LoginService.handleLoginRequest(loginMessage);
+
         return null;
     }
 
@@ -38,7 +38,7 @@ public class Resource {
     @Path("/loginValidation")
     @Produces(MediaType.APPLICATION_JSON)
     public Object loginValidation(String resource) {
-        LoginValidation loginValidationMessage = gson.fromJson(resource, LoginValidation.class);
+        LoginValidationMessage loginValidationMessage = gson.fromJson(resource, LoginValidationMessage.class);
         return null;
     }
 
@@ -47,6 +47,7 @@ public class Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Object signIn(String resource) {
         SignInMessage signInMessage = gson.fromJson(resource, SignInMessage.class);
+        LoginService.handleSignInRequest(signInMessage);
 
         return null;
     }
