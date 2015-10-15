@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <title>Conquered Network</title>
+
+    <style type="text/css">
+        body {
+        font: 10pt arial;
+        }
+        #mynetwork {
+        width: 800px;
+        height: 800px;
+        border: 1px solid lightgray;
+        background-color:#45505c;
+        }
+    </style>
+
+    <script type="text/javascript" src="../js/shared/vis.js"></script>
+    <link href="../css/vis.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript">
+    var DIR = 'img/soft-scraps-icons/';
+
+    var nodes = null;
+    var edges = null;
+    var network = null;
+
+    // Called when the Visualization API is loaded.
+    function draw() {
+
+      var DIR = '../images/';
+      nodes = [
+        {id: 1,  shape: 'circularImage', image: DIR + 'user.png'},
+        {id: 2,  shape: 'circularImage', image: DIR + 'user.png'},
+        {id: 3,  shape: 'circularImage', image: DIR + 'user.png'},
+        {id: 4,  shape: 'circularImage', image: DIR + 'user.png', label:"player"},
+        {id: 5,  shape: 'circularImage', image: DIR + 'user.png'},
+        {id: 6,  shape: 'circularImage', image: DIR + 'user.png'},
+        {id: 7,  shape: 'circularImage', image: DIR + 'user.png'},
+        {id: 8,  shape: 'circularImage', image: DIR + 'user.png'},
+		{id: 9,  shape: 'circularImage', image: DIR + 'user.png'},		
+        //{id: 9, shape: 'circularImage', image: DIR + 'userB.jpg', brokenImage: DIR + 'user_avatar.jpg', label:"fallback image in action"}
+      ];
+
+      // create connections between people
+      // value corresponds with the amount of contact between two people
+      edges = [
+        {from: 1, to: 3},
+        {from: 2, to: 4},
+        {from: 4, to: 5},
+        {from: 4, to: 3},
+        {from: 4, to: 6},
+        {from: 6, to: 7},
+        {from: 7, to: 8},
+        {from: 8, to: 9}
+      ];
+
+      // create a network
+      var container = document.getElementById('mynetwork');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      var options = {
+        nodes: {
+          borderWidth:4,
+          size:30,
+	      color: {
+            border: '#222222',
+            background: '#666666'
+          },
+          font:{color:'#eeeeee'}
+        },
+        edges: {
+          color: 'lightgray'
+        }
+      };
+      network = new vis.Network(container, data, options);
+    }
+
+    </script>
+    <script src="../js/shared/googleAnalytics.js"></script>
+</head>
+
+<body onload="draw()">
+
+<div id="mynetwork"></div>
+</body>
+</html>
