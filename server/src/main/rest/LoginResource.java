@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Path("/user")
-public class Resource {
+public class LoginResource {
 
     public static Gson gson = new Gson();
 
