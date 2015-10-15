@@ -1,3 +1,272 @@
-<div>
-<h1>Welcome !!!!!!!! Let the games begin !</h1>
+<!-- I know it's bad practice but it's a hackathon ... 
+-->
+<style>
+  @import url(http://fonts.googleapis.com/css?family=Dosis:300|Lato:300,400,600,700|Roboto+Condensed:300,700|Open+Sans+Condensed:300,600|Open+Sans:400,300,600,700|Maven+Pro:400,700);
+  @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+  * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  html {
+    background: black;
+  }
+  
+  body {
+    font-family: "Open Sans";
+    font-size: 16px;
+    color: White;
+    font-smoothing: antialiased;
+    font-weight: 600;
+  }
+  
+  a {
+    color: #BBB;
+  }
+  
+  .content:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    display: block;
+    background-color: black;
+    background-image: url("images/startup.png");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
+  
+  .content {}
+  
+  .content .title {
+    text-align: center;
+    font-size: 2.0rem;
+    font-weight: 600;
+    padding-bottom: 30px;
+  }
+  
+  .content input {
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: "Open Sans";
+    margin: 10px 0px;
+    border: none;
+    padding: 10px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+  }
+  
+  .content input[type=checkbox] {
+    display: none;
+  }
+  
+  .content label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    margin-left: 5px;
+    margin-right: 10px;
+    top: 5px;
+  }
+  
+  .content label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    background-color: #aaa;
+    -moz-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+    -webkit-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+  }
+  
+  .content input[type=checkbox]:checked + label:before {
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    color: Black;
+    text-align: center;
+    line-height: 20px;
+  }
+  
+  .content span {
+    font-size: 0.9rem;
+  }
+  
+  .content button {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 10px;
+    margin: 20px 0px;
+    background-color: #66A756;
+    color: White;
+    border: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+  }
+  
+  .content .buttons {
+    width: 100%;
+    margin: 30px 0px;
+  }
+  
+  .content .buttons button {
+    float: left;
+    width: 30%;
+    margin: 0px 1.5%;
+  }
+  
+  .content .buttons:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  
+  .content .already {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  .content .login {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 540px;
+    height: 340px;
+    background-color: rgba(10, 10, 10, 0.5);
+    margin: auto auto;
+    padding: 40px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-shadow: 0 0 10px black;
+    -webkit-box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px black;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  .content .register {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 540px;
+    height: 400px;
+    background-color: rgba(10, 10, 10, 0.5);
+    margin: auto auto;
+    padding: 40px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-shadow: 0 0 10px black;
+    -webkit-box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px black;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  @-webkit-keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(-500px);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0px);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-500px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+  
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+  }
+  
+  @-webkit-keyframes fadeOutDown {
+    0% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      -webkit-transform: translateY(1000px);
+    }
+  }
+  
+  @keyframes fadeOutDown {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(1000px);
+    }
+  }
+  
+  .fadeOutDown {
+    -webkit-animation-name: fadeOutDown;
+    animation-name: fadeOutDown;
+  }
+</style>
+
+<div class="content">
+
+  <div ng-class="registerClass">
+    <div class="title">Create account</div>
+    <input type="text" placeholder="E-mail" />
+	<input type="text" placeholder="Username" />
+    <input type="password" placeholder="Password" />
+    <input type="checkbox" id="rememberMe" />
+    <label for="rememberMe"></label><span>I have read and agree to the <a href="#">Terms of Use </a>and <a href="#">Privacy Policy</a></span>
+    <button ng-click="onRegisterClick()">Create Account</button>
+    <div class="already">Already have an account? <a ng-click="hideLogin = false ">Sign In</a></div>
+  </div>
+
+  <div id="login" ng-hide="hideLogin" ng-class ="loginClass">
+    <div class="title">Login</div>
+    <input type="text" placeholder="E-mail" />
+    <input type="password" placeholder="Password" />
+	<div class="already">Are you new? Then please add token</div>
+	<input type="password" placeholder="Token" />
+	<button ng-click="onLoginClick()">Login</button>
+  </div>
 </div>

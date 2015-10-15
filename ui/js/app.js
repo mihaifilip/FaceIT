@@ -6,14 +6,6 @@ app.config(function($routeProvider) {
             templateUrl: "templates/main.html",
             controller: "MainController"
         })
-        .when("/register", {
-            templateUrl: "templates/register.html",
-            controller: "RegisterController"
-        })
-        .when("/login", {
-            templateUrl: "templates/login.html",
-            controller: "LoginController"
-        })
         .when("/game", {
             templateUrl: "templates/game.html",
             controller: "GameController"
@@ -24,7 +16,7 @@ app.config(function($routeProvider) {
         })
         .when("/user/:username", {
             templateUrl: "templates/user.html",
-            controller: "UserController",
+            controller: "UserController"
         })
         .when("/user/:username/settings", {
             templateUrl: "templates/settings.html",
@@ -33,8 +25,8 @@ app.config(function($routeProvider) {
         .when("/map", {
             templateUrl: "templates/map.html",
             controller: "MapController"
-        })
-        .otherwise({
-            redirectTo: "/main"
         });
+        //.otherwise({
+          //  redirectTo: "/main"
+        //});
 });
