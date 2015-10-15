@@ -1,7 +1,7 @@
 package app;
 
 
-import database.Database;
+import database.UserDatabase;
 import util.LoginMessage;
 import util.SignInMessage;
 
@@ -27,7 +27,7 @@ public class LoginService implements IService {
 
         try {
             Map<String, Object> user;
-            Database db = new Database();
+            UserDatabase db = new UserDatabase();
 
             user = db.getUserByEmail(message.getEmail());
 
@@ -68,7 +68,7 @@ public class LoginService implements IService {
         String passwordHash = hashPassword(message.getPassword());
 
         try {
-            Database db = new Database();
+            UserDatabase db = new UserDatabase();
             Map<String, Object> user = db.getUserByEmail(message.getEmail());
             if (user != null) {
                 return "Email address " + message.getEmail() + " already in use";
@@ -144,7 +144,7 @@ public class LoginService implements IService {
             message.setSubject("FaceIT registration");
 
             // Now set the actual message
-            message.setText("Thank you for registering to FaceIT! \n \n On your next login attempt, please use the token below: \n" + token);
+            message.setText("Thank you for registering to FaceIT! \n \n On your next login attempt, please use the token below: \n " + token);
 
             // Send message
             Transport.send(message);
