@@ -18,28 +18,12 @@ public class Resource {
 
     public static Gson gson = new Gson();
 
-
-    /*
-    login example
-     */
-
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     public Object login(String resource) {
         LoginMessage loginMessage = gson.fromJson(resource, LoginMessage.class);
-
-        LoginService.handleLoginRequest(loginMessage);
-
-        return null;
-    }
-
-    @POST
-    @Path("/loginValidation")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Object loginValidation(String resource) {
-        LoginValidationMessage loginValidationMessage = gson.fromJson(resource, LoginValidationMessage.class);
-        return null;
+        return gson.toJson(LoginService.handleLoginRequest(loginMessage));
     }
 
     @POST
@@ -47,9 +31,7 @@ public class Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Object signIn(String resource) {
         SignInMessage signInMessage = gson.fromJson(resource, SignInMessage.class);
-        LoginService.handleSignInRequest(signInMessage);
-
-        return null;
+        return gson.toJson(LoginService.handleSignInRequest(signInMessage));
     }
 
 

@@ -1,10 +1,7 @@
 package app;
 
 
-import org.parse4j.*;
-import org.parse4j.ParseException;
-import org.parse4j.callback.FindCallback;
-import org.parse4j.callback.GetCallback;
+import database.Database;
 import util.LoginMessage;
 import util.SignInMessage;
 
@@ -28,49 +25,65 @@ public class LoginService implements IService {
 
     public static String handleLoginRequest(LoginMessage message) {
 
-        final String[] callBackMessage = new String[1];
+        try {
+            Map<String, Object> user;
+            Database db = new Database();
 
-        Parse.initialize("oqyzHQVvY1Zz2oEmEpRbvRneyEo5QrNJuUr0hIFL", "UAKGvtTYDZKmYd0MQlhApviC7lt0dQlqgLE6rMQ2");
+            user = db.getUserByEmail(message.getEmail());
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
-        query.whereEqualTo("email", message.getEmail());
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> users, ParseException e) {
-                if (e == null) {
-                    if (users.size() == 0) {
-                        callBackMessage[0] =  "Invalid email address " + message.getEmail();
+            if (user == null) {
+                return "Email address " + message.getEmail() + " not registered.";
+            }
+            String passwordHash = (String) user.get("password");
+            if (passwordHash.equals(hashPassword(message.getPassword()))) {
+                return "Invalid password.";
+            }
+            if (user.get("token") != null) {
+                if (message.getToken() != null) {
+                    if (message.getToken().equals(user.get("token"))) {
+                        db.updateUserToken(message.getEmail(), null);
                     } else {
-                        String passwordHash = users.get(0).getString("password");
-                        String computedHash = hashPassword(message.getPassword());
-                        if (!passwordHash.equals(computedHash)) {
-                            callBackMessage[0] = "Invalid password";
-                        } else {
-                            callBackMessage[0] = SUCCESS;
-                        }
+                        return "Tokens do not match.";
                     }
                 } else {
-                    e.printStackTrace();
+                    return "Please insert authentication token for the first login";
                 }
             }
-        });
 
-        return callBackMessage[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
     }
 
     public static String handleSignInRequest(SignInMessage message) {
         if (message.getEmail() == null || message.getUsername() == null || message.getPassword() == null) {
             return "Invalid information provided";
         }
+
         //generate token
         String token = UUID.randomUUID().toString().substring(0,6);
+
         //hash password
         String passwordHash = hashPassword(message.getPassword());
-        //store password and token into database
-        //todo
+
+        try {
+            Database db = new Database();
+            Map<String, Object> user = db.getUserByEmail(message.getEmail());
+            if (user != null) {
+                return "Email address " + message.getEmail() + " already in use";
+            }
+            db.addUser(message.getUsername(), message.getEmail(), passwordHash, token);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Database Error";
+        }
+
         //send token to email address
         sendEmail(message.getEmail(), token);
 
-        return "A token has been sent to your email address.";
+        return SUCCESS;
     }
 
     private static String hashPassword(String password) {

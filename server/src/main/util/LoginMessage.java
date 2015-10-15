@@ -7,6 +7,7 @@ public class LoginMessage {
     String username;
     String email;
     String password;
+    String token;
 
     public String getUsername() {
         return username;
@@ -30,5 +31,13 @@ public class LoginMessage {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
