@@ -1,5 +1,7 @@
 package database;
 
+import util.bean.Employee;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +11,7 @@ import java.util.*;
 /**
  * Created by mihfilip on 15/10/2015.
  */
-public static class EmployeeDatabase extends Database {
+public class EmployeeDatabase extends Database {
 
     public void addEmployee(String name, String email, String picture, String officeid, String department) throws Exception {
 
@@ -65,7 +67,7 @@ public static class EmployeeDatabase extends Database {
         return employees;
     }
 
-    public Map<String, Object> getEmployeeForId(String id) throws Exception {
+    public List<Employee> getEmployeeForId(String id) throws Exception {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         Class.forName(JDBC_DRIVER);
@@ -76,19 +78,22 @@ public static class EmployeeDatabase extends Database {
 
         ResultSet rs = preparedStatement.executeQuery();
 
-        Map<String, Object> employees = new HashMap<String, Object>();
+        List<Employee> employees = new ArrayList<>();
 
         while (rs.next()) {
+            Employee e = new Employee();
             String email = rs.getString("email");
             String name = rs.getString("name");
             String picture = rs.getString("picture");
             String officeid = rs.getString("officeid");
             String department = rs.getString("department");
-            employees.put("email", email);
-            employees.put("name", name);
-            employees.put("picture", picture);
-            employees.put("officeid", officeid);
-            employees.put("department", department);
+            e.setId(id);
+            e.setEmail(email);
+            e.setName(name);
+            e.setPicture(picture);
+            e.setOfficeid(officeid);
+            e.setDepartment(department);
+            employees.add(e);
         }
 
         System.out.println("Retrieved" + employees.size() + "employees");
@@ -153,7 +158,7 @@ public static class EmployeeDatabase extends Database {
         conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 
         preparedStatement = conn.prepareStatement("SELECT COUNT(*) AS total FROM faceit.employee WHERE officeid = ?");
-        preparedStatement.setString(1, officeId);
+        preparedStatement.setString(1, officeid);
 
         ResultSet rs = preparedStatement.executeQuery();
         Integer count = null;
@@ -168,10 +173,10 @@ public static class EmployeeDatabase extends Database {
         return count;
     }
 
-    public Map<String, Object> getRandomPicturesForOfficeId((String city, String country) throws Exception {
+    public Map<String, Object> getRandomPicturesForOfficeId(String city, String country) throws Exception {
 
         //get officeId first
-        String officeId = OfficeDatabase.getOfficeIdForCityCountry(city, country);
+        String officeid = new OfficeDatabase().getOfficeIdForCityCountry(city, country);
         Integer count = getEmployeeNoForOffice(officeid);
 
         Connection conn = null;
@@ -182,7 +187,7 @@ public static class EmployeeDatabase extends Database {
         count = count / 6 + 1;
         String limitQuery = "SELECT * FROM faceit.employee WHERE officeid = ? ORDER BY RAND() LIMIT " + count;
         preparedStatement = conn.prepareStatement(limitQuery);
-        preparedStatement.setString(1, officeId);
+        preparedStatement.setString(1, officeid);
 
         ResultSet rs = preparedStatement.executeQuery();
 

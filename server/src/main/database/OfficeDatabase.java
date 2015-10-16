@@ -1,17 +1,17 @@
 package database;
 
+import util.bean.Office;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by mihfilip on 15/10/2015.
  */
-public static class OfficeDatabase extends Database {
+public class OfficeDatabase extends Database {
 
     public void addOffice(String city, String country, String picture, String telephone, String picturemap, String coordinates) throws Exception {
 
@@ -35,7 +35,45 @@ public static class OfficeDatabase extends Database {
         close(conn, null);
     }
 
-    public Map<String, Object> getOfficeForId(String id) throws Exception {
+    public List<Office> getOfficesAll() throws Exception {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        Class.forName(JDBC_DRIVER);
+        conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+
+        preparedStatement = conn.prepareStatement("SELECT * FROM faceit.office");
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        List<Office> offices = new ArrayList<>();
+
+        while (rs.next()) {
+            Office o = new Office();
+            String id = rs.getString("id");
+            String city = rs.getString("city");
+            String country = rs.getString("country");
+            String picture = rs.getString("picture");
+            String telephone = rs.getString("telephone");
+            String picturemap = rs.getString("picturemap");
+            String coordinates = rs.getString("coordinates");
+            o.setId(id);
+            o.setCity(city);
+            o.setCountry(country);
+            o.setPicture(picture);
+            o.setTelephone(telephone);
+            o.setPicturemap(picturemap);
+            o.setCoordinates(coordinates);
+            offices.add(o);
+        }
+
+        System.out.println("Retrieved" +  offices.size() + "offices");
+
+        close(conn, null);
+
+        return offices;
+    }
+
+    public List<Office> getOfficeForId(String id) throws Exception {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         Class.forName(JDBC_DRIVER);
@@ -46,27 +84,30 @@ public static class OfficeDatabase extends Database {
 
         ResultSet rs = preparedStatement.executeQuery();
 
-        Map<String, Object> employees = new HashMap<String, Object>();
+        List<Office> offices = new ArrayList<>();
 
         while (rs.next()) {
+            Office o = new Office();
             String city = rs.getString("city");
             String country = rs.getString("country");
             String picture = rs.getString("picture");
             String telephone = rs.getString("telephone");
             String picturemap = rs.getString("picturemap");
             String coordinates = rs.getString("coordinates");
-            employees.put("city", city);
-            employees.put("country", country);
-            employees.put("picture", picture);
-            employees.put("telephone", telephone);
-            employees.put("picturemap", picturemap);
-            employees.put("coordinates", coordinates);
+            o.setId(id);
+            o.setCity(city);
+            o.setCountry(country);
+            o.setPicture(picture);
+            o.setTelephone(telephone);
+            o.setPicturemap(picturemap);
+            o.setCoordinates(coordinates);
+            offices.add(o);
         }
 
-        System.out.println("Retrieved" + employees.size() + "employees");
+        System.out.println("Retrieved" +  offices.size() + "offices");
 
         close(conn, null);
-        return employees;
+        return offices;
     }
 
     public Map<String, Object> getOfficeForCityCountry(String city, String country) throws Exception {
@@ -102,7 +143,7 @@ public static class OfficeDatabase extends Database {
         return employees;
     }
 
-    public Map<String, Object> getOfficeIdForCityCountry(String city, String country) throws Exception {
+    public String getOfficeIdForCityCountry(String city, String country) throws Exception {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         Class.forName(JDBC_DRIVER);
@@ -119,9 +160,10 @@ public static class OfficeDatabase extends Database {
             officeId = rs.getString("id");
         }
 
-        System.out.println("Retrieved " + officeId + " for " + city + ", "country);
+        System.out.println("Retrieved " + officeId + " for " + city + ", " + country);
 
         close(conn, null);
+
         return officeId;
     }
 

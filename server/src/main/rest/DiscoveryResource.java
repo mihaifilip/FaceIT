@@ -7,4 +7,7 @@ import javax.ws.rs.Path;
  */
 @Path("/discovery")
 public class DiscoveryResource {
+
+
+
 }

@@ -1,5 +1,7 @@
 package database;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -13,7 +15,6 @@ public class Database {
     protected static final String DB_URL = "jdbc:mysql://localhost/faceit";
     protected static final String DB_USER = "sqluser";
     protected static final String DB_PASS = "sqluserpw";
-
 
 
     // You need to close the resultSet

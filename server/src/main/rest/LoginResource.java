@@ -3,7 +3,6 @@ package rest;
 import app.LoginService;
 import com.google.gson.Gson;
 import util.LoginMessage;
-import util.LoginValidationMessage;
 import util.SignInMessage;
 
 import javax.ws.rs.*;
