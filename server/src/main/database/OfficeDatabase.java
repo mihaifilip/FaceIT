@@ -143,6 +143,37 @@ public class OfficeDatabase extends Database {
         return employees;
     }
 
+    public Office getOfficeForCity(String city) throws Exception {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        Class.forName(JDBC_DRIVER);
+        conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+
+        preparedStatement = conn.prepareStatement("SELECT * FROM faceit.office WHERE city = ?");
+        preparedStatement.setString(1, city);
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        Office o = new Office();
+
+        while (rs.next()) {
+            String id = rs.getString("id");
+            String picture = rs.getString("picture");
+            String telephone = rs.getString("telephone");
+            String picturemap = rs.getString("picturemap");
+            String coordinates = rs.getString("coordinates");
+            o.setId(id);
+            o.setPicture(picture);
+            o.setPicturemap(picturemap);
+            o.setTelephone(telephone);
+            o.setCoordinates(coordinates);
+            break;
+        }
+
+        close(conn, null);
+        return o;
+    }
+
     public String getOfficeIdForCityCountry(String city, String country) throws Exception {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
