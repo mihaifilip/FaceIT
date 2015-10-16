@@ -1,2 +1,166 @@
-<h4>Your location is: <span class="city"></span></h4>
-<div id="container"></div>
+<header>
+    <div class="wrapper">
+       <a href="#"><img id="logo" src="images/logo3.png" alt="logo" title="Just FaceIT !" /></a>
+        <span id="usernav"><a href="#">Logout</a> - <a href="#">Settings</a> - <a href="#">My Profile<span><img src="images/user_avatar_s.jpg" /></span></a>
+        </span>
+    </div>
+</header>
+
+<nav>
+    <ul id="n" class="clearfix">
+        <li ng-class="{sel: hover1}" ng-mouseenter="hover1 = true" ng-mouseleave="hover1 = false"><a href="#">Homepage</a></li>
+        <li ng-class="{sel: hover2}" ng-mouseenter="hover2 = true" ng-mouseleave="hover2 = false"><a href="#">Profile</a></li>
+        <li ng-class="{sel: hover3}" ng-mouseenter="hover3 = true" ng-mouseleave="hover3 = false"><a href="#">Highscore</a></li>
+        <li ng-class="{sel: hover4}" ng-mouseenter="hover4 = true" ng-mouseleave="hover4 = false"><a href="#">Achievements</a></li>
+        <li ng-class="{sel: hover5}" ng-mouseenter="hover5 = true" ng-mouseleave="hover5 = false"><a href="#/game">Game</a></li>
+        <li ng-class="{sel: hover6}" ng-mouseenter="hover6 = true" ng-mouseleave="hover6 = false"><a href="#">Advance Statistics</a></li>
+    </ul>
+</nav>
+
+<div id="wrapper" style="width: 1900px; height: 955px; top: -55px">
+    <img width="1900px" height="955px" src="images/World_Map_Country_color_back.jpg" alt="World continents">
+
+    <div class="pin"  data-xpos="543" data-ypos="300">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">New York<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">USA<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+
+    <div class="pin" data-xpos="1080" data-ypos="274">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">Bucharest<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">Romania<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+
+    <div class="pin" data-xpos="1220" data-ypos="403">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">Dubai<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">UAE<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+    </div>
+
+    <div class="pin" data-xpos="935" data-ypos="235">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">London<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">United Kingdom<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+    </div>
+	
+	<div class="pin" data-xpos="1480" data-ypos="545">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">Singapore<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">Singapore<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+	
+	<div class="pin pin-down" data-xpos="1350" data-ypos="465">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">Bangalore<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">India<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+    </div>
+	
+	<div class="pin" data-xpos="1047" data-ypos="217">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">Gdynia<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">Poland<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+    </div>
+	
+	<div class="pin" data-xpos="957" data-ypos="253">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">Paris<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">France<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+    </div>
+	
+	<div class="pin" data-xpos="1580" data-ypos="465">
+		<div><div class="card">
+
+		</div>
+	<p class="cardScore">0/150<p>
+			<img src="images/input.jpg" class="card_image"/> 
+			<p class="cardCity">City:<p>
+			<p class="cityValue">Manila<p>
+			<p class="cardCountry">Country:<p>
+			<p class="countryValue">Philippines<p>
+			<p class="cardTelephone">Telephone:<p>
+			<p class="telephoneValue">+40 031 7122618<p>
+		</div>
+    </div>
+    </div>
+	
+	
+	
+</div>

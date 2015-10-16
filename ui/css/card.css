@@ -1,0 +1,106 @@
+.card {
+	width: 260px;
+	height: 260px;
+	background: #4C6B76;
+	-moz-border-radius-topleft: 37px;
+	-webkit-border-top-left-radius: 37px;
+ 	border-top-left-radius: 37px;
+	-moz-border-radius-topright: 39px;
+	-webkit-border-top-right-radius: 39px;
+	border-top-right-radius: 39px;
+	-moz-border-radius-bottomright: 31px;
+	-webkit-border-bottom-right-radius: 31px;
+	border-bottom-right-radius: 31px;
+	-moz-border-radius-bottomleft: 39px;
+	-webkit-border-bottom-left-radius: 39px;
+	border-bottom-left-radius: 39px;
+	border: 2px solid #CCEBEB;
+	-webkit-box-shadow: 10px 13px 14px 0px rgba(50, 93, 148, 0.7);
+	-moz-box-shadow:    10px 13px 14px 0px rgba(50, 93, 148, 0.7);
+	box-shadow:         10px 13px 14px 0px rgba(50, 93, 148, 0.7);
+
+}
+
+.card_image {
+	height: 157px;
+    width: 256px;
+    position: relative;
+    bottom: 290px;
+    left: -820px;
+	-moz-border-radius-topleft: 37px;
+	-webkit-border-top-left-radius: 37px;
+ 	border-top-left-radius: 37px;
+	-moz-border-radius-topright: 39px;
+	-webkit-border-top-right-radius: 39px;
+	border-top-right-radius: 39px;
+	-moz-border-radius-bottomright: 31px;
+	-webkit-border-bottom-right-radius: 31px;
+	border-bottom-right-radius: 31px;
+	-moz-border-radius-bottomleft: 39px;
+	-webkit-border-bottom-left-radius: 39px;
+	border-bottom-left-radius: 39px;    
+	opacity: 0.6;
+}
+
+.cardScore {
+    position: relative;
+    bottom: 240px;
+    left: -820px;
+    font-size: 120%;
+    color: #CCEBEB;
+    font-family: Georgia;
+}
+
+.cardCity{
+	position: relative;
+    bottom: 305px;
+    left: -820px;
+    font-size: 100%;
+    color: #CCEBEB;
+    font-family: Georgia;
+}
+
+.cityValue{
+	position: relative;
+    bottom: 340px;
+    left: -820px;
+    font-size: 100%;
+    color: #CCEBEB;
+    font-family: Georgia;
+}
+
+.cardCountry{
+	position: relative;
+    bottom: 355px;
+    left: -820px;
+    font-size: 100%;
+    color: #CCEBEB;
+    font-family: Georgia;
+}
+
+.countryValue{
+	position: relative;
+    bottom: 390px;
+    left: -820px;
+    font-size: 100%;
+    color: #CCEBEB;
+    font-family: Georgia;
+}
+
+.cardTelephone{
+	position: relative;
+    bottom: 405px;
+    left: -820px;
+    font-size: 100%;
+    color: #CCEBEB;
+    font-family: Georgia;
+}
+
+.telephoneValue{
+	position: relative;
+    bottom: 440px;
+    left: 115px;
+    font-size: 100%;
+    color: #CCEBEB;
+    font-family: Georgia;
+}
