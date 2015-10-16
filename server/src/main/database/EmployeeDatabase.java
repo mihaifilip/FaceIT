@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by mihfilip on 15/10/2015.
  */
-public class EmployeeDatabase extends Database {
+public static class EmployeeDatabase extends Database {
 
     public void addEmployee(String name, String email, String picture, String officeid, String department) throws Exception {
 
@@ -59,7 +59,7 @@ public class EmployeeDatabase extends Database {
             employees.put("department", department);
         }
 
-        System.out.println("Retrieved" +  employees.size() + "employees");
+        System.out.println("Retrieved" + employees.size() + "employees");
 
         close(conn, null);
         return employees;
@@ -91,7 +91,7 @@ public class EmployeeDatabase extends Database {
             employees.put("department", department);
         }
 
-        System.out.println("Retrieved" +  employees.size() + "employees");
+        System.out.println("Retrieved" + employees.size() + "employees");
 
         close(conn, null);
         return employees;
@@ -143,6 +143,61 @@ public class EmployeeDatabase extends Database {
         preparedStatement.executeUpdate();
 
         close(conn, null);
+    }
+
+    public Integer getEmployeeNoForOffice(String officeid) throws Exception {
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        Class.forName(JDBC_DRIVER);
+        conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+
+        preparedStatement = conn.prepareStatement("SELECT COUNT(*) AS total FROM faceit.employee WHERE officeid = ?");
+        preparedStatement.setString(1, officeId);
+
+        ResultSet rs = preparedStatement.executeQuery();
+        Integer count = null;
+
+        while (rs.next()) {
+            count = rs.getInt("total");
+        }
+
+        System.out.println("Retrieved total of " + count);
+
+        close(conn, null);
+        return count;
+    }
+
+    public Map<String, Object> getRandomPicturesForOfficeId((String city, String country) throws Exception {
+
+        //get officeId first
+        String officeId = OfficeDatabase.getOfficeIdForCityCountry(city, country);
+        Integer count = getEmployeeNoForOffice(officeid);
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        Class.forName(JDBC_DRIVER);
+        conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+
+        count = count / 6 + 1;
+        String limitQuery = "SELECT * FROM faceit.employee WHERE officeid = ? ORDER BY RAND() LIMIT " + count;
+        preparedStatement = conn.prepareStatement(limitQuery);
+        preparedStatement.setString(1, officeId);
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        Map<String, Object> employees = new HashMap<String, Object>();
+
+        while (rs.next()) {
+            String name = rs.getString("name");
+            String picture = rs.getString("picture");
+            employees.put(name, picture);
+        }
+
+        System.out.println("Retrieved" + employees.size() + "employees");
+
+        close(conn, null);
+        return employees;
     }
 
 }

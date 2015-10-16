@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * Created by mihfilip on 15/10/2015.
  */
-public class OfficeDatabase extends Database {
+public static class OfficeDatabase extends Database {
 
     public void addOffice(String city, String country, String picture, String telephone, String picturemap, String coordinates) throws Exception {
 
@@ -63,7 +63,7 @@ public class OfficeDatabase extends Database {
             employees.put("coordinates", coordinates);
         }
 
-        System.out.println("Retrieved" +  employees.size() + "employees");
+        System.out.println("Retrieved" + employees.size() + "employees");
 
         close(conn, null);
         return employees;
@@ -96,10 +96,33 @@ public class OfficeDatabase extends Database {
             employees.put("coordinates", coordinates);
         }
 
-        System.out.println("Retrieved" +  employees.size() + "employees");
+        System.out.println("Retrieved" + employees.size() + "employees");
 
         close(conn, null);
         return employees;
+    }
+
+    public Map<String, Object> getOfficeIdForCityCountry(String city, String country) throws Exception {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        Class.forName(JDBC_DRIVER);
+        conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+
+        preparedStatement = conn.prepareStatement("SELECT * FROM faceit.office WHERE city = ? AND country = ?");
+        preparedStatement.setString(1, city);
+        preparedStatement.setString(2, country);
+
+        ResultSet rs = preparedStatement.executeQuery();
+        String officeId = null;
+
+        while (rs.next()) {
+            officeId = rs.getString("id");
+        }
+
+        System.out.println("Retrieved " + officeId + " for " + city + ", "country);
+
+        close(conn, null);
+        return officeId;
     }
 
 }
