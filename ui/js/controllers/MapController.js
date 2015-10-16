@@ -1,4 +1,4 @@
-var MapController = function($scope, $location,$document) {
+var MapController = function($scope, $location,$document,xxxService,$http) {
 
 //TODO refactor the jQuery stuff 
 $(document).ready(function() {
@@ -35,20 +35,26 @@ $(document).ready(function() {
 	
 	// click the tooltip
 	$('.tooltip-up, .tooltip-down').click(function() {
-		var city = $(this).find('h2').text();
-		var country = $(this).find('h2').text();
-		console.log(city)
+		var city = $(this).find('.cityValue').text();
+		var country = $(this).find('.countryValue').text();
+		console.log(city);
+		console.log(country);
 		var sendData = {
-			email: "",
+			email: "", 
 			city:  "",
 			country: ""
 		};
+		sendData.email = xxxService.getEmail();
+		sendData.city = city;
+		sendData.country = country;
+		console.log(sendData);
 		var url = "http://bucd464:9081/game/begin";
 		console.log(sendData);
-		//$http.post(url, sendData).then(function(response){
-			//console.log(response.data);
-    });
+		$http.post(url, sendData).then(function(response){
+			console.log(response.data);
+		});
+	});
 });
-};
+}
 
 app.controller("MapController", MapController);

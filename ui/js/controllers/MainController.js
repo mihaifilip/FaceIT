@@ -1,4 +1,4 @@
-var MainController = function($scope, $http , $location, $document, authService) {
+var MainController = function($scope, $http , $location, $document, authService,xxxService) {
 	$scope.showRegister = true;
 	$scope.hideLogin = true;
 	$scope.isRegister = true;
@@ -38,6 +38,7 @@ var MainController = function($scope, $http , $location, $document, authService)
 		$scope.registerClass = "register fadeOutDown";
 	};
 	$scope.onLoginClick = function(){
+		xxxService.setEmail($scope.userLoginData.email);
 		authService.login($scope.userLoginData).then(function(response){
 			console.log("......."+response);
 			$scope.loginStatus = response === "SUCCESS";

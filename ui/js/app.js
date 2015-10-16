@@ -30,3 +30,18 @@ app.config(function($routeProvider) {
           //  redirectTo: "/main"
         //});
 });
+
+//small hack to pass data between controllers
+app.service("xxxService", function () {
+var email = {};
+
+	return {
+		getEmail: function () {
+			return email;
+		},
+		setEmail: function (value) {
+			email = value;
+		}
+	};
+
+});
