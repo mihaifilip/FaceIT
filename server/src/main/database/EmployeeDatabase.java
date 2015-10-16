@@ -173,7 +173,7 @@ public class EmployeeDatabase extends Database {
         return count;
     }
 
-    public Map<String, Object> getRandomPicturesForOfficeId(String city, String country) throws Exception {
+    public Map<String, String> getRandomPicturesForOfficeId(String city, String country) throws Exception {
 
         //get officeId first
         String officeid = new OfficeDatabase().getOfficeIdForCityCountry(city, country);
@@ -185,13 +185,14 @@ public class EmployeeDatabase extends Database {
         conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 
         count = count / 6 + 1;
-        String limitQuery = "SELECT * FROM faceit.employee WHERE officeid = ? ORDER BY RAND() LIMIT " + count;
+        //hardcoded 3 pictures per request
+        String limitQuery = "SELECT * FROM faceit.employee WHERE officeid = ? ORDER BY RAND() LIMIT " + 3;
         preparedStatement = conn.prepareStatement(limitQuery);
         preparedStatement.setString(1, officeid);
 
         ResultSet rs = preparedStatement.executeQuery();
 
-        Map<String, Object> employees = new HashMap<String, Object>();
+        Map<String, String> employees = new HashMap<String, String>();
 
         while (rs.next()) {
             String name = rs.getString("name");

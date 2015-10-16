@@ -1,5 +1,6 @@
 package app;
 
+import database.EmployeeDatabase;
 import util.GameRequestMessage;
 import util.bean.Employee;
 
@@ -15,16 +16,17 @@ public class GameRequestService {
 
     public static Map<String, String> handleGameRequest(GameRequestMessage message) {
 
+        Map<String, String> results = new HashMap<>();
         //get 3 random employees
-        List<Employee> employees = new ArrayList<Employee>();
-
-        //send map containing pictureid and username to UI
-        Map<String, String> resource = new HashMap<String, String>();
-        for (Employee e : employees) {
-            resource.put(e.getName(), e.getPicture());
+        EmployeeDatabase ed = new EmployeeDatabase();
+        try {
+            results = ed.getRandomPicturesForOfficeId(message.getCity(), message.getCountry());
+            return results;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return resource;
+        return null;
     }
 
 }
